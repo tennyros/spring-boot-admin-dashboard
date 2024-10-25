@@ -48,65 +48,65 @@ public class AdminController {
         return ADMIN_PAGE;
     }
 
-    @PostMapping(value = "/new_user")
-    public String registrationExecution(@Valid @ModelAttribute("userRequestDto") UserRequestDto userRequestDto,
-                                        BindingResult result, Model model) {
-        userValidator.validate(userRequestDto, result);
-        if (result.hasErrors()) {
-            model.addAttribute(ROLES, roleService.getAllRoles());
-            model.addAttribute(USERS, userService.getAllUsers());
-            model.addAttribute("activeTab", "new-user");
-            return ADMIN_PAGE;
-        }
-        User user = userMapper.requestToEntity(userRequestDto);
-        registrationService.register(user);
-        return REDIRECT_ADMIN_PAGE;
-    }
+//    @PostMapping(value = "/new_user")
+//    public String registrationExecution(@Valid @ModelAttribute("userRequestDto") UserRequestDto userRequestDto,
+//                                        BindingResult result, Model model) {
+//        userValidator.validate(userRequestDto, result);
+//        if (result.hasErrors()) {
+//            model.addAttribute(ROLES, roleService.getAllRoles());
+//            model.addAttribute(USERS, userService.getAllUsers());
+//            model.addAttribute("activeTab", "new-user");
+//            return ADMIN_PAGE;
+//        }
+//        User user = userMapper.requestToEntity(userRequestDto);
+//        registrationService.register(user);
+//        return REDIRECT_ADMIN_PAGE;
+//    }
 
 
-    @PostMapping(value = "/update")
-    public String updateUserExecution(@Valid @ModelAttribute("userRequestDto") UserRequestDto userRequestDto,
-                                      BindingResult result, Model model) {
-        userValidator.validate(userRequestDto, result);
-        if (result.hasErrors()) {
-            model.addAttribute(ROLES, roleService.getAllRoles());
-            model.addAttribute(USERS, userService.getAllUsers());
-            return ADMIN_PAGE;
-        }
-        User user = userMapper.requestToEntity(userRequestDto);
-        userService.updateUser(user);
-        return REDIRECT_ADMIN_PAGE;
-    }
+//    @PostMapping(value = "/update")
+//    public String updateUserExecution(@Valid @ModelAttribute("userRequestDto") UserRequestDto userRequestDto,
+//                                      BindingResult result, Model model) {
+//        userValidator.validate(userRequestDto, result);
+//        if (result.hasErrors()) {
+//            model.addAttribute(ROLES, roleService.getAllRoles());
+//            model.addAttribute(USERS, userService.getAllUsers());
+//            return ADMIN_PAGE;
+//        }
+//        User user = userMapper.requestToEntity(userRequestDto);
+//        userService.updateUser(user);
+//        return REDIRECT_ADMIN_PAGE;
+//    }
 
-    @PostMapping(value = "/delete")
-    public String deleteUser(@ModelAttribute("userRequestDto") UserRequestDto userRequestDto, Principal principal, Model model) {
-        User currentUser = userService.getUserByEmail(principal.getName())
-                .orElseThrow(() -> {
-                    log.error("Current user is not found for principal {}", principal.getName());
-                    return new UserNotFoundException();
-                });
-        Long userId = userRequestDto.getId();
-        User userToDelete = userService.getUserById(userId).orElseThrow(UserNotFoundException::new);
-        if (userToDelete.getId() == 1) {
-            model.addAttribute(ERROR_MESSAGE, "You cannot delete the super administrator!");
-            model.addAttribute(USERS, userService.getAllUsers());
-            model.addAttribute(ROLES, roleService.getAllRoles());
-            return ADMIN_PAGE;
-        }
-        if (userToDelete.getRoles().stream().anyMatch(role ->
-                role.getAuthority().equals("ROLE_ADMIN")) && currentUser.getId() != 1) {
-            model.addAttribute(ERROR_MESSAGE, "Only super administrator can delete other administrators!");
-            model.addAttribute(USERS, userService.getAllUsers());
-            model.addAttribute(ROLES, roleService.getAllRoles());
-            return ADMIN_PAGE;
-        }
-        try {
-            userService.deleteUser(userId);
-        } catch (UnsupportedOperationException e) {
-            log.error("Error while deleting user with id: {}", userId, e);
-            model.addAttribute(ERROR_MESSAGE, e.getMessage());
-            return "error";
-        }
-        return REDIRECT_ADMIN_PAGE;
-    }
+//    @PostMapping(value = "/delete")
+//    public String deleteUser(@ModelAttribute("userRequestDto") UserRequestDto userRequestDto, Principal principal, Model model) {
+//        User currentUser = userService.getUserByEmail(principal.getName())
+//                .orElseThrow(() -> {
+//                    log.error("Current user is not found for principal {}", principal.getName());
+//                    return new UserNotFoundException();
+//                });
+//        Long userId = userRequestDto.getId();
+//        User userToDelete = userService.getUserById(userId).orElseThrow(UserNotFoundException::new);
+//        if (userToDelete.getId() == 1) {
+//            model.addAttribute(ERROR_MESSAGE, "You cannot delete the super administrator!");
+//            model.addAttribute(USERS, userService.getAllUsers());
+//            model.addAttribute(ROLES, roleService.getAllRoles());
+//            return ADMIN_PAGE;
+//        }
+//        if (userToDelete.getRoles().stream().anyMatch(role ->
+//                role.getAuthority().equals("ROLE_ADMIN")) && currentUser.getId() != 1) {
+//            model.addAttribute(ERROR_MESSAGE, "Only super administrator can delete other administrators!");
+//            model.addAttribute(USERS, userService.getAllUsers());
+//            model.addAttribute(ROLES, roleService.getAllRoles());
+//            return ADMIN_PAGE;
+//        }
+//        try {
+//            userService.deleteUser(userId);
+//        } catch (UnsupportedOperationException e) {
+//            log.error("Error while deleting user with id: {}", userId, e);
+//            model.addAttribute(ERROR_MESSAGE, e.getMessage());
+//            return "error";
+//        }
+//        return REDIRECT_ADMIN_PAGE;
+//    }
 }

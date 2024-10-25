@@ -1,5 +1,6 @@
 package ru.kata.spring.boot.http.handlers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserErrorResponse {
 
     private Map<String, String> fieldErrors;

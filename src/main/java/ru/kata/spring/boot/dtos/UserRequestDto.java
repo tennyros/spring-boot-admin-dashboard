@@ -1,10 +1,8 @@
 package ru.kata.spring.boot.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import ru.kata.spring.boot.models.Role;
 
-import javax.persistence.Transient;
 import javax.validation.constraints.*;
 import java.util.Set;
 

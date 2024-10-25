@@ -16,7 +16,7 @@
                 <th scope="col">Delete</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="users-table-body">
             <tr th:each="user : ${users}">
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.firstName}"></td>
@@ -30,11 +30,7 @@
                             data-bs-age=${user.age}, data-bs-email=${user.email}">Edit</button>
                 </td>
                 <td>
-                    <form th:method="post" th:action="@{/admin/delete}" style="display:inline;"
-                          onsubmit="return confirm('Are you sure you want to delete this user?')">
-                        <input type="hidden" name="id" th:value="${user.id}"/>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <button type="button" class="btn btn-danger delete-button" id="deleteUserButton" th:attr="data-user-id=${user.id}">Delete</button>
                 </td>
             </tr>
             </tbody>

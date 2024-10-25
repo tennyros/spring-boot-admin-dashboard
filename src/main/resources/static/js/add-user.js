@@ -1,15 +1,23 @@
-function createUser() {
+document.querySelector('#addUserButton').addEventListener("click", function() {
+    const form = document.querySelector('#user-form');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    addUser();
+});
+
+function addUser() {
     const formData = {
-        firstName: document.querySelector('#user-firstname').value,
-        lastName: document.querySelector('#user-lastname').value,
-        age: document.querySelector('#user-age').value,
-        email: document.querySelector('#user-email').value,
-        password: document.querySelector('#user-password').value,
-        passwordConfirm: document.querySelector('#user-passwordConfirm').value,
+        firstName: document.querySelector('.user-firstname').value,
+        lastName: document.querySelector('.user-lastname').value,
+        age: document.querySelector('.user-age').value,
+        email: document.querySelector('.user-email').value,
+        password: document.querySelector('.user-password').value,
+        passwordConfirm: document.querySelector('.user-passwordConfirm').value,
         roles: getSelectedRoles()
     };
 
-    // Проверка на наличие выбранных ролей
     if (formData.roles.length === 0) {
         document.querySelector('#roles-error').style.display = 'block';
         return;
@@ -17,7 +25,6 @@ function createUser() {
         document.querySelector('#roles-error').style.display = 'none';
     }
 
-    // Отправляем данные на сервер через fetch
     fetch('/api/v1/admin/users', {
         method: 'POST',
         headers: {
@@ -35,8 +42,11 @@ function createUser() {
             return response.json();
         })
         .then(data => {
-            alert('User created successfully!');
+            console.log('User creation success:', data);
+            // alert('User created successfully!');
             clearForm();
+            fetchAndUpdateUserTable();
+            document.querySelector('#admin-view-tab').click();
         })
         .catch(error => {
             console.error('Error creating user:', error)
@@ -56,16 +66,15 @@ function handleValidationErrors(errors) {
 }
 
 function getSelectedRoles() {
-    const selectedRoles = [];
-    const rolesSelect = document.querySelector('#roles');
+    const selectedOptions = document.querySelectorAll('.roles-select option:checked');
+    return Array.from(selectedOptions).map(option => {
+        const roleShortName = option.textContent;
+        return roleShortName === 'ADMIN' ? { roleName: 'ROLE_ADMIN' } : { roleName: 'ROLE_USER' };
+    });
+}
 
-    // Проходим по всем выбранным элементам <option>
-    for (let option of rolesSelect.options) {
-        if (option.selected) {
-            selectedRoles.push({roleName: option.value});
-        }
-    }
-    return selectedRoles;
+function clearForm() {
+    document.querySelector('#user-form').reset();
 }
 
 function clearErrors() {

@@ -22,31 +22,186 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const editUserModal = document.getElementById('userEditModal');
-            editUserModal.addEventListener('show.bs.modal', function (event) {
-                const button = event.relatedTarget;
-                const userId = button.getAttribute('data-bs-id');
-                const userFirstName = button.getAttribute('data-bs-firstname');
-                const userLastName = button.getAttribute('data-bs-lastname');
-                const userAge = button.getAttribute('data-bs-age');
-                const userEmail = button.getAttribute('data-bs-email');
+        const editUserModal = document.getElementById('userEditModal');
+        editUserModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const userId = button.getAttribute('data-bs-id');
+            const userFirstName = button.getAttribute('data-bs-firstname');
+            const userLastName = button.getAttribute('data-bs-lastname');
+            const userAge = button.getAttribute('data-bs-age');
+            const userEmail = button.getAttribute('data-bs-email');
 
-                const modalIdInput = editUserModal.querySelector('#user-id');
-                const hiddenIdInput = editUserModal.querySelector('#id');
-                const modalFirstNameInput = editUserModal.querySelector('#user-firstname');
-                const modalLastNameInput = editUserModal.querySelector('#user-lastname');
-                const modalAgeInput = editUserModal.querySelector('#user-age');
-                const modalEmailInput = editUserModal.querySelector('#user-email');
+            const modalIdInput = editUserModal.querySelector('#user-id');
+            const hiddenIdInput = editUserModal.querySelector('#id');
+            const modalFirstNameInput = editUserModal.querySelector('.user-firstname');
+            const modalLastNameInput = editUserModal.querySelector('.user-lastname');
+            const modalAgeInput = editUserModal.querySelector('.user-age');
+            const modalEmailInput = editUserModal.querySelector('.user-email');
 
-                modalIdInput.value = userId;
-                hiddenIdInput.value = userId;
-                modalFirstNameInput.value = userFirstName;
-                modalLastNameInput.value = userLastName;
-                modalAgeInput.value = userAge;
-                modalEmailInput.value = userEmail;
-            });
+            modalIdInput.value = userId;
+            hiddenIdInput.value = userId;
+            modalFirstNameInput.value = userFirstName;
+            modalLastNameInput.value = userLastName;
+            modalAgeInput.value = userAge;
+            modalEmailInput.value = userEmail;
         });
     </script>
+
+<!--    <script>-->
+<!--        document.querySelector('#addUserButton').addEventListener("click", function() {-->
+<!--            const form = document.querySelector('#user-form');-->
+<!--            if (!form.checkValidity()) {-->
+<!--                form.reportValidity();-->
+<!--                return;-->
+<!--            }-->
+<!--            createUser();-->
+<!--        });-->
+
+<!--        function createUser() {-->
+<!--            const formData = {-->
+<!--                firstName: document.querySelector('.user-firstname').value,-->
+<!--                lastName: document.querySelector('.user-lastname').value,-->
+<!--                age: document.querySelector('.user-age').value,-->
+<!--                email: document.querySelector('.user-email').value,-->
+<!--                password: document.querySelector('.user-password').value,-->
+<!--                passwordConfirm: document.querySelector('.user-passwordConfirm').value,-->
+<!--                roles: getSelectedRoles()-->
+<!--            };-->
+
+<!--            if (formData.roles.length === 0) {-->
+<!--                document.querySelector('#roles-error').style.display = 'block';-->
+<!--                return;-->
+<!--            } else {-->
+<!--                document.querySelector('#roles-error').style.display = 'none';-->
+<!--            }-->
+
+<!--            fetch('/api/v1/admin/users', {-->
+<!--                method: 'POST',-->
+<!--                headers: {-->
+<!--                    'Content-Type': 'application/json'-->
+<!--                },-->
+<!--                body: JSON.stringify(formData)-->
+<!--            })-->
+<!--                .then(response => {-->
+<!--                    if (!response.ok) {-->
+<!--                        return response.json().then(errors => {-->
+<!--                            handleValidationErrors(errors);-->
+<!--                            throw new Error('Validation or server error!')-->
+<!--                        });-->
+<!--                    }-->
+<!--                    return response.json();-->
+<!--                })-->
+<!--                .then(data => {-->
+<!--                    console.log('Success:', data);-->
+<!--                    // alert('User created successfully!');-->
+<!--                    clearForm();-->
+<!--                    fetchAndUpdateUserTable();-->
+<!--                    document.querySelector('#admin-view-tab').click();-->
+<!--                })-->
+<!--                .catch(error => {-->
+<!--                    console.error('Error creating user:', error)-->
+<!--                });-->
+<!--        }-->
+
+<!--        function handleValidationErrors(errors) {-->
+<!--            clearErrors();-->
+
+<!--            for (let field in errors.fieldErrors) {-->
+<!--                const errorDiv = document.querySelector(`#${field}-error`);-->
+<!--                if (errorDiv) {-->
+<!--                    errorDiv.style.display = 'block';-->
+<!--                    errorDiv.textContent = errors.fieldErrors[field];-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+
+<!--        function getSelectedRoles() {-->
+<!--            const selectedOptions = document.querySelectorAll('.roles-select option:checked');-->
+<!--            return Array.from(selectedOptions).map(option => {-->
+<!--                const roleShortName = option.textContent;-->
+<!--                return roleShortName === 'ADMIN' ? { roleName: 'ROLE_ADMIN' } : { roleName: 'ROLE_USER' };-->
+<!--            });-->
+<!--        }-->
+
+<!--        function clearForm() {-->
+<!--            document.querySelector('#user-form').reset();-->
+<!--        }-->
+
+<!--        function clearErrors() {-->
+<!--            document.querySelectorAll('.error-message').forEach(errorDiv => {-->
+<!--                errorDiv.style.display = 'none';-->
+<!--                errorDiv.textContent = '';-->
+<!--            })-->
+<!--        }-->
+
+<!--        function fetchAndUpdateUserTable() {-->
+<!--            fetch('/api/v1/admin/users')-->
+<!--                .then(response => response.json())-->
+<!--                .then(users => {-->
+<!--                    updateUserTable(users);-->
+<!--                })-->
+<!--                .catch(error => {-->
+<!--                    console.error('Error fetching users:', error);-->
+<!--                });-->
+<!--        }-->
+
+<!--        function updateUserTable(users) {-->
+<!--            const tbody = document.querySelector('#users-table-body');-->
+<!--            tbody.innerHTML = '';-->
+
+<!--            users.forEach(user => {-->
+<!--                const row = document.createElement('tr');-->
+<!--                row.innerHTML = `-->
+<!--                        <td>${user.id}</td>-->
+<!--                        <td>${user.firstName}</td>-->
+<!--                        <td>${user.lastName}</td>-->
+<!--                        <td>${user.email}</td>-->
+<!--                        <td>${user.age}</td>-->
+<!--                        <td>${user.roles.map(role => role.roleName).join(' ').replace(/ROLE_/g, '')}</td>-->
+<!--                        <td>-->
+<!--                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userEditModal"-->
+<!--                                    data-bs-id="${user.id}" data-bs-firstname="${user.firstName}"-->
+<!--                                    data-bs-lastname="${user.lastName}" data-bs-age="${user.age}"-->
+<!--                                    data-bs-email="${user.email}">Edit</button>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <button type="button" class="btn btn-danger delete-button" data-user-id="${user.id}">Delete</button>-->
+<!--                        </td>`;-->
+<!--                tbody.appendChild(row);-->
+<!--            });-->
+
+<!--            document.querySelectorAll('.delete-button').forEach(button => {-->
+<!--                button.addEventListener('click', function() {-->
+<!--                    const userId = this.getAttribute('data-user-id');-->
+<!--                    console.log('userId=' + userId);-->
+<!--                    deleteUser(userId);-->
+<!--               });-->
+<!--            });-->
+<!--        }-->
+
+<!--        function deleteUser(userId) {-->
+<!--            if (!confirm('Are you sure you want to delete this user?')) {-->
+<!--                return;-->
+<!--            }-->
+
+<!--            fetch(`/api/v1/admin/users/${userId}`, {-->
+<!--                method: 'DELETE'-->
+<!--            })-->
+<!--            .then(response => {-->
+<!--                if (!response.ok) {-->
+<!--                    throw new Error('Failed to delete user');-->
+<!--                }-->
+<!--                return response.json();-->
+<!--            })-->
+<!--            .then(() => {-->
+<!--                alert('User deleted successfully!');-->
+<!--                fetchAndUpdateUserTable(); // Обновляем таблицу после удаления-->
+<!--            })-->
+<!--            .catch(error => {-->
+<!--                console.error('Error deleting user:', error);-->
+<!--                alert('Failed to delete user. Please try again later!');-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
 
 </th:block>

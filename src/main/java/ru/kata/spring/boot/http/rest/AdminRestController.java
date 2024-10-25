@@ -3,7 +3,6 @@ package ru.kata.spring.boot.http.rest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -55,7 +54,7 @@ public class AdminRestController {
     @ResponseStatus(HttpStatus.OK)
     public UserResponseDto getUser(@PathVariable("id") Long id) {
         return userMapper.toResponseDto(userService.getUserById(id)
-                .orElseThrow(UserNotFoundException::new));
+                .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found!")));
     }
 
     @PostMapping()
@@ -78,7 +77,7 @@ public class AdminRestController {
     public UserResponseDto updateUser(@Validated(OnUpdate.class) @PathVariable("id") Long id,
                                       @Valid @RequestBody UserRequestDto userRequestDto, BindingResult result) {
 
-        User userForUpdate = userService.getUserById(id).orElseThrow(UserNotFoundException::new);
+        User userForUpdate = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found!"));
         userValidator.validate(userRequestDto, result);
         if (result.hasErrors()) {
             validationErrorMessageInit(result);
@@ -95,17 +94,24 @@ public class AdminRestController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable("id") Long id) {
-        try {
-            userService.deleteUser(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new UserNotFoundException();
+//        try {
+//            userService.deleteUser(id);
+//        } catch (EmptyResultDataAccessException e) {
+//            throw new UserNotFoundException();
+//        }
+        if (userService.getUserById(id).isEmpty()) {
+            throw new UserNotFoundException("User with ID " + id + " not found!");
         }
     }
 
     private static void validationErrorMessageInit(BindingResult result) {
         Map<String, String> fieldErrors = result.getFieldErrors().stream()
                 .filter(fieldError -> fieldError.getDefaultMessage() != null)
-                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+                .collect(Collectors.toMap(
+                        FieldError::getField,
+                        FieldError::getDefaultMessage,
+                        (message1, message2) -> message1 + "; " + message2
+                ));
         throw new UserValidationException(fieldErrors);
     }
 }

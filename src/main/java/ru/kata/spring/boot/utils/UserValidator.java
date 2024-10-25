@@ -29,8 +29,6 @@ public class UserValidator implements Validator {
         UserRequestDto userRequestDto = (UserRequestDto) target;
 
         Optional<User> userByEmail = userService.getUserByEmail(userRequestDto.getEmail());
-//        log.info("UserRequestDTOs id: {}", userRequestDto.getId());
-//        log.info("UserByEmail id: {}", userByEmail.get().getId());
         if (userByEmail.isPresent() && !userByEmail.get().getId().equals(userRequestDto.getId())) {
             errors.rejectValue("email", "", "User with such email is already exists!");
         }
