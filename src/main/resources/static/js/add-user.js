@@ -1,13 +1,13 @@
-document.querySelector('#addUserButton').addEventListener("click", function() {
-    const form = document.querySelector('#user-form');
+document.querySelector('#addUserButton').addEventListener("click", async function() {
+    const form = document.querySelector('.user-form');
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
-    addUser();
+    await addUser();
 });
 
-function addUser() {
+async function addUser() {
     const formData = {
         firstName: document.querySelector('.user-firstname').value,
         lastName: document.querySelector('.user-lastname').value,
@@ -25,32 +25,30 @@ function addUser() {
         document.querySelector('#roles-error').style.display = 'none';
     }
 
-    fetch('/api/v1/admin/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(errors => {
-                    handleValidationErrors(errors);
-                    throw new Error('Validation or server error!')
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('User creation success:', data);
-            // alert('User created successfully!');
-            clearForm();
-            fetchAndUpdateUserTable();
-            document.querySelector('#admin-view-tab').click();
-        })
-        .catch(error => {
-            console.error('Error creating user:', error)
+    try {
+        const response = await fetch('/api/v1/admin/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
         });
+        if (!response.ok) {
+            const errors = await response.json();
+            handleValidationErrors(errors);
+            throw new Error('Validation or server error!');
+        }
+
+        const data = await response.json();
+        console.log('User creation success:', data);
+        // alert('User created successfully!');
+        clearForm();
+        await fetchAndUpdateUsersTable();
+        document.querySelector('#admin-view-tab').click();
+    } catch (error) {
+        console.error('Error creating user:', error);
+        // alert('User created successfully!');
+    }
 }
 
 function handleValidationErrors(errors) {
@@ -74,7 +72,7 @@ function getSelectedRoles() {
 }
 
 function clearForm() {
-    document.querySelector('#user-form').reset();
+    document.querySelector('.user-form').reset();
 }
 
 function clearErrors() {

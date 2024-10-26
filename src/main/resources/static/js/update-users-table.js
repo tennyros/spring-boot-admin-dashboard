@@ -1,15 +1,18 @@
-function fetchAndUpdateUserTable() {
-    fetch('/api/v1/admin/users')
-        .then(response => response.json())
-        .then(users => {
-            updateUserTable(users);
-        })
-        .catch(error => {
-            console.error('Error fetching users:', error);
-        });
+async function fetchAndUpdateUsersTable() {
+    try {
+        const response = await fetch('/api/v1/admin/users')
+        if (!response.ok) {
+            throw new Error('Failed to fetch users data!');
+        }
+        const users = await response.json();
+        updateUsersTable(users);
+    } catch {
+        console.error('Error fetching users:', error);
+        alert('Failed to load users!');
+    }
 }
 
-function updateUserTable(users) {
+function updateUsersTable(users) {
     const tbody = document.querySelector('#users-table-body');
     tbody.innerHTML = '';
 
@@ -34,10 +37,10 @@ function updateUserTable(users) {
     });
 
     document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', async function() {
             const userId = this.getAttribute('data-user-id');
-            console.log('userId=' + userId);
-            deleteUser(userId);
+            // console.log('userId = ' + userId);
+            await deleteUser(userId);
         });
     });
 }

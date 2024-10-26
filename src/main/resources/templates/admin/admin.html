@@ -56,13 +56,13 @@
                                                     <input type="text" th:field="*{id}" id="user-id" class="form-control"
                                                            readonly disabled/><br>
                                                 </div>
-    <!--                                            <div th:replace="admin/fragments/user-form :: form"></div>-->
+<!--                                                <div th:replace="admin/fragments/user-form :: form"></div>-->
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                     Close
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                                <button type="button" class="btn btn-primary">Edit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -75,7 +75,7 @@
                         <h5 class="card-header">Add new user</h5>
                         <div class="card-body">
                             <div class="form-container">
-                                <form id="user-form">
+                                <form class="user-form">
                                     <div th:replace="admin/fragments/user-form :: form"></div>
                                     <button type="button" class="btn btn-success btn-center" id="addUserButton">Add new user</button>
                                 </form>

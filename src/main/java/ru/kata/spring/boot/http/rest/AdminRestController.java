@@ -94,14 +94,10 @@ public class AdminRestController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable("id") Long id) {
-//        try {
-//            userService.deleteUser(id);
-//        } catch (EmptyResultDataAccessException e) {
-//            throw new UserNotFoundException();
-//        }
         if (userService.getUserById(id).isEmpty()) {
             throw new UserNotFoundException("User with ID " + id + " not found!");
         }
+        userService.deleteUser(id);
     }
 
     private static void validationErrorMessageInit(BindingResult result) {
