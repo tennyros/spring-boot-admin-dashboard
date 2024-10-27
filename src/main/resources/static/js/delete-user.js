@@ -9,9 +9,6 @@ async function deleteUser(userId) {
     if (!confirm('Are you sure you want to delete this user?')) {
         return;
     }
-
-    // console.log('userId = ' + userId)
-
     try {
         const response = await fetch(`/api/v1/admin/users/${userId}`, {
             method: 'DELETE'

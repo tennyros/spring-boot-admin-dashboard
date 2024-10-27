@@ -18,12 +18,12 @@
             </thead>
             <tbody id="users-table-body">
             <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.age}"></td>
-                <td th:text="${#strings.arrayJoin(user.roles, ' ').replace('ROLE_', '')}"></td>
+                <td th:text="${user?.id}"></td>
+                <td th:text="${user?.firstName}"></td>
+                <td th:text="${user?.lastName}"></td>
+                <td th:text="${user?.email}"></td>
+                <td th:text="${user?.age}"></td>
+                <td th:text="${#strings.arrayJoin(user?.roles, ' ')}"></td>
                 <td>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userEditModal"
                             th:attr="data-bs-id=${user.id}, data-bs-firstname=${user.firstName}, data-bs-lastname=${user.lastName},

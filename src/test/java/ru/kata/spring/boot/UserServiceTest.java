@@ -1,4 +1,4 @@
-//package ru.kata.spring.boot_security.demo;
+//package ru.kata.spring.boot;
 //
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
@@ -7,11 +7,18 @@
 //import org.mockito.Mock;
 //import org.mockito.MockitoAnnotations;
 //import org.mockito.junit.jupiter.MockitoExtension;
-//import ru.kata.spring.boot_security.demo.models.User;
-//import ru.kata.spring.boot_security.demo.repositories.UserRepository;
-//import ru.kata.spring.boot_security.demo.services.impl.UserServiceImpl;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import ru.kata.spring.boot.exceptions.RoleNotFoundException;
+//import ru.kata.spring.boot.models.Role;
+//import ru.kata.spring.boot.models.User;
+//import ru.kata.spring.boot.repositories.UserRepository;
+//import ru.kata.spring.boot.services.RoleService;
+//import ru.kata.spring.boot.services.impl.UserServiceImpl;
 //
+//import java.util.HashSet;
 //import java.util.Optional;
+//import java.util.Set;
 //
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,6 +26,8 @@
 //
 //@ExtendWith(MockitoExtension.class)
 //class UserServiceTest {
+//
+//    private static final Logger log = LoggerFactory.getLogger(UserServiceTest.class);
 //
 //    @Mock
 //    private UserRepository userRepository;
@@ -28,14 +37,27 @@
 //
 //    @BeforeEach
 //    public void setUp() {
-//        MockitoAnnotations.openMocks(this);
+//       MockitoAnnotations.openMocks(this);
 //    }
 //
 //    @Test
-//    void testGetUserByUsername_UserExists() {
-//        String email = "admin@admin.ru";
+//    void testGetUserByEmail_UserExists() {
+//        Long userId = 1L;
+//        String firstName = "firstName";
+//        String lastName = "lastName";
+//        String password = "password";
+//        int age = 20;
+//        String email = "admin@mail.com";
+//
 //        User user = new User();
+//        user.setId(userId);
+//        user.setFirstName(firstName);
+//        user.setLastName(lastName);
+//        user.setPassword(password);
+//        user.setAge(age);
 //        user.setEmail(email);
+//        log.info("User: {}", user);
+//        System.out.println(user);
 //        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
 //
 //        Optional<User> foundUser = userService.getUserByEmail(email);

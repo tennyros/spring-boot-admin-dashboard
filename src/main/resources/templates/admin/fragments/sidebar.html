@@ -1,17 +1,19 @@
-<div th:fragment="sidebar" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="sidebar" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" id="sidebar">
     <nav class="col-md-1 d-none d-md-block sidebar py-3 px-0" style="width: 280px;">
         <div class="sidebar-sticky">
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a sec:authorize="hasRole('ADMIN')"
-                       class="nav-link"
-                       th:classappend="${#httpServletRequest.requestURI == '/admin/admin' ? 'active' : ''}"
-                       th:href="@{/admin/admin}">Admin</a>
+                <li ></li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+                    <a class="nav-link" th:onclick="'showAdminContent()'"
+                       th:classappend="${#httpServletRequest.requestURI == '/admin/admin' ? 'active' : ''}">
+                        Admin
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       th:classappend="${#httpServletRequest.requestURI == '/user' ? 'active' : ''}"
-                       th:href="@{/user}">User</a>
+                <li sec:authorize="hasRole('USER')" class="nav-item">
+                    <a class="nav-link" th:onclick="'showUserContent()'"
+                       th:classappend="${#httpServletRequest.requestURI == '/user' ? 'active' : ''}">
+                        User
+                    </a>
                 </li>
             </ul>
         </div>

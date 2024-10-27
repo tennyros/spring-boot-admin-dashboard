@@ -1,9 +1,6 @@
 package ru.kata.spring.boot.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +17,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class User implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;

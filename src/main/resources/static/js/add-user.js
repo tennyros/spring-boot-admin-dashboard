@@ -1,28 +1,25 @@
-document.querySelector('#addUserButton').addEventListener("click", async function() {
-    const form = document.querySelector('.user-form');
-    if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-    }
-    await addUser();
+document.querySelector('.add-user-button').addEventListener("click", async function() {
+    const form = document.querySelector('.add-user-form');
+    clearErrors(form);
+    await handleFormSubmission(form, (form) => addUser(form));
 });
 
-async function addUser() {
+async function addUser(form) {
     const formData = {
-        firstName: document.querySelector('.user-firstname').value,
-        lastName: document.querySelector('.user-lastname').value,
-        age: document.querySelector('.user-age').value,
-        email: document.querySelector('.user-email').value,
-        password: document.querySelector('.user-password').value,
-        passwordConfirm: document.querySelector('.user-passwordConfirm').value,
-        roles: getSelectedRoles()
+        firstName: form.querySelector('.user-firstname').value,
+        lastName: form.querySelector('.user-lastname').value,
+        age: form.querySelector('.user-age').value,
+        email: form.querySelector('.user-email').value,
+        password: form.querySelector('.user-password').value,
+        passwordConfirm: form.querySelector('.user-passwordConfirm').value,
+        roles: getSelectedRoles(form)
     };
 
     if (formData.roles.length === 0) {
-        document.querySelector('#roles-error').style.display = 'block';
+        form.querySelector('#roles-error').style.display = 'block';
         return;
     } else {
-        document.querySelector('#roles-error').style.display = 'none';
+        form.querySelector('#roles-error').style.display = 'none';
     }
 
     try {
@@ -35,49 +32,23 @@ async function addUser() {
         });
         if (!response.ok) {
             const errors = await response.json();
-            handleValidationErrors(errors);
+            handleValidationErrors(errors, form);
+            form.querySelector('.user-password').value = '';
+            form.querySelector('.user-passwordConfirm').value = '';
             throw new Error('Validation or server error!');
         }
 
+        form.querySelector('.user-password').value = '';
+        form.querySelector('.user-passwordConfirm').value = '';
+
         const data = await response.json();
+        clearForm(form);
+        clearErrors(form);
         console.log('User creation success:', data);
         // alert('User created successfully!');
-        clearForm();
         await fetchAndUpdateUsersTable();
         document.querySelector('#admin-view-tab').click();
     } catch (error) {
         console.error('Error creating user:', error);
-        // alert('User created successfully!');
     }
-}
-
-function handleValidationErrors(errors) {
-    clearErrors();
-
-    for (let field in errors.fieldErrors) {
-        const errorDiv = document.querySelector(`#${field}-error`);
-        if (errorDiv) {
-            errorDiv.style.display = 'block';
-            errorDiv.textContent = errors.fieldErrors[field];
-        }
-    }
-}
-
-function getSelectedRoles() {
-    const selectedOptions = document.querySelectorAll('.roles-select option:checked');
-    return Array.from(selectedOptions).map(option => {
-        const roleShortName = option.textContent;
-        return roleShortName === 'ADMIN' ? { roleName: 'ROLE_ADMIN' } : { roleName: 'ROLE_USER' };
-    });
-}
-
-function clearForm() {
-    document.querySelector('.user-form').reset();
-}
-
-function clearErrors() {
-    document.querySelectorAll('.error-message').forEach(errorDiv => {
-        errorDiv.style.display = 'none';
-        errorDiv.textContent = '';
-    })
 }

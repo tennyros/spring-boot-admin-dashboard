@@ -1,6 +1,7 @@
 package ru.kata.spring.boot.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,13 +9,13 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Entity
 @Table(name = "roles")
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Role implements GrantedAuthority {
 
     @Id

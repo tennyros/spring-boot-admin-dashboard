@@ -11,7 +11,6 @@ import ru.kata.spring.boot.models.User;
 public interface UserMapper {
 
     User requestToEntity(UserRequestDto userRequestDto);
-    UserRequestDto toRequestDto(User user);
     @Mapping(target = "roles", ignore = true)
     void updateUserFromDto(UserRequestDto userRequestDto, @MappingTarget User user);
 

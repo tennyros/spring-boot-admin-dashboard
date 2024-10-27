@@ -1,0 +1,59 @@
+<div th:fragment="edit-user-form">
+    <div>
+        <label>
+            First name
+            <input type="text" class="user-firstname form-control" placeholder="First name" minlength="3" maxlength="18" required/><br>
+        </label>
+        <div id="firstName-error" class="alert alert-danger" style="color:red; text-align: center; display: none;"></div>
+    </div>
+    <div>
+        <label>
+            Last name
+            <input type="text" class="user-lastname form-control" placeholder="Last name" minlength="3" maxlength="18" required/><br>
+        </label>
+        <div id="lastName-error" class="alert alert-danger" style="color:red; text-align: center; display: none;"></div>
+    </div>
+    <div>
+        <label>
+            Age
+            <input type="number" class="user-age form-control" placeholder="Age" min="14" max="125" required/><br>
+        </label>
+        <div id="age-error" class="alert alert-danger" style="color:red; text-align: center; display: none;"></div>
+    </div>
+    <div>
+        <label>
+            Email
+            <input type="email" class="user-email form-control" placeholder="Email" required/><br>
+        </label>
+        <div id="email-error" class="alert alert-danger error-message" style="color:red; text-align: center; display: none;"></div>
+    </div>
+    <div>
+        <label>
+            Password
+            <input type="password" class="user-password form-control password-input"
+                   placeholder="Password" minlength="6" maxlength="18" required/><br>
+        </label>
+        <div id="password-error" class="alert alert-danger" role="alert" style="color:red; text-align: center; display: none;"></div>
+    </div>
+    <div>
+        <label>
+            Confirm password
+            <input type="password" class="user-passwordConfirm form-control password-confirm-input"
+                   placeholder="Confirm password" minlength="6" maxlength="18" required/><br>
+        </label>
+        <div id="passwordConfirm-error" class="alert alert-danger password-error" role="alert" style="color:red; text-align: center; display: none;">
+            Passwords do not match.
+        </div>
+    </div>
+    <div>
+        <label>
+            Role
+            <select multiple class="roles-select form-control" id="" size="2" required>
+                <option th:each="role : ${roles}"
+                    th:value="${role.roleName}"
+                    th:text="${role.roleName.substring(5)}"></option>
+            </select><br>
+        </label>
+        <div id="roles-error" class="alert alert-danger" role="alert" style="color:red; text-align: center; display: none;"></div>
+    </div>
+</div>

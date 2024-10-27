@@ -4,46 +4,25 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
 
-    <script>
-        document.querySelectorAll('.password-confirm-input').forEach(function(passwordConfirmElement) {
-            passwordConfirmElement.addEventListener('input', function() {
-                const form = this.closest('form');
-                const password = form.querySelector('.password-input').value;
-                const confirmPassword = this.value;
-                const errorMessage = form.querySelector('.password-error');
+    <script th:inline="javascript">
+        const userRoles = /*[[${#authentication?.principal?.authorities}]]*/ [];
 
-                if (confirmPassword !== password) {
-                    errorMessage.style.display = 'block';
-                } else {
-                    errorMessage.style.display = 'none';
-                }
-            });
-        });
-    </script>
+        function showAdminContent() {
+            document.getElementById("admin-content").style.display = "block";
+            document.getElementById("user-content").style.display = "none";
+        }
 
-    <script>
-        const editUserModal = document.getElementById('userEditModal');
-        editUserModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            const userId = button.getAttribute('data-bs-id');
-            const userFirstName = button.getAttribute('data-bs-firstname');
-            const userLastName = button.getAttribute('data-bs-lastname');
-            const userAge = button.getAttribute('data-bs-age');
-            const userEmail = button.getAttribute('data-bs-email');
+        function showUserContent() {
+            document.getElementById("user-content").style.display = "block";
+            document.getElementById("admin-content").style.display = "none";
+        }
 
-            const modalIdInput = editUserModal.querySelector('#user-id');
-            const hiddenIdInput = editUserModal.querySelector('#id');
-            const modalFirstNameInput = editUserModal.querySelector('.user-firstname');
-            const modalLastNameInput = editUserModal.querySelector('.user-lastname');
-            const modalAgeInput = editUserModal.querySelector('.user-age');
-            const modalEmailInput = editUserModal.querySelector('.user-email');
-
-            modalIdInput.value = userId;
-            hiddenIdInput.value = userId;
-            modalFirstNameInput.value = userFirstName;
-            modalLastNameInput.value = userLastName;
-            modalAgeInput.value = userAge;
-            modalEmailInput.value = userEmail;
+        document.addEventListener("DOMContentLoaded", function() {
+            if (userRoles.includes("ROLE_ADMIN")) {
+                showAdminContent();
+            } else {
+                showUserContent();
+            }
         });
     </script>
 
