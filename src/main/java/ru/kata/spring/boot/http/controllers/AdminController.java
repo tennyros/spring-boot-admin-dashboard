@@ -1,8 +1,6 @@
 package ru.kata.spring.boot.http.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,11 +14,9 @@ import ru.kata.spring.boot.services.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/admin")
 @RequiredArgsConstructor
 public class AdminController {
 
-    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
     private final UserService userService;
     private final RoleService roleService;
 
@@ -33,6 +29,6 @@ public class AdminController {
         model.addAttribute("users", users);
         model.addAttribute("userRequestDto", new UserRequestDto());
         model.addAttribute("roles", roleService.getAllRoles());
-        return "/admin/main";
+        return "/main";
     }
 }

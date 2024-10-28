@@ -1,4 +1,4 @@
-async function handleFormSubmission(form, submitAction) {
+export async function handleFormSubmission(form, submitAction) {
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
@@ -6,7 +6,7 @@ async function handleFormSubmission(form, submitAction) {
     await submitAction(form);
 }
 
-function handleValidationErrors(errors, form) {
+export function handleValidationErrors(errors, form) {
     clearErrors(form);
 
     for (let field in errors.fieldErrors) {
@@ -18,7 +18,7 @@ function handleValidationErrors(errors, form) {
     }
 }
 
-function getSelectedRoles(form) {
+export function getSelectedRoles(form) {
     const selectedOptions = form.querySelectorAll('.roles-select option:checked');
     return Array.from(selectedOptions).map(option => {
         const roleShortName = option.textContent;
@@ -26,13 +26,13 @@ function getSelectedRoles(form) {
     });
 }
 
-function clearForm(form) {
+export function clearForm(form) {
     form.reset();
     const fields = form.querySelectorAll('input, textarea');
     fields.forEach(field => field.value = '');
 }
 
-function clearErrors(form) {
+export function clearErrors(form) {
     form.querySelectorAll('.alert.alert-danger').forEach(errorDiv => {
         errorDiv.style.display = 'none';
         errorDiv.textContent = '';

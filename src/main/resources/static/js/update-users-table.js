@@ -1,4 +1,6 @@
-async function fetchAndUpdateUsersTable() {
+import {deleteUser} from "./delete-user";
+
+export async function fetchAndUpdateUsersTable() {
     try {
         const response = await fetch('/api/v1/admin/users')
         if (!response.ok) {
@@ -12,7 +14,7 @@ async function fetchAndUpdateUsersTable() {
     }
 }
 
-function updateUsersTable(users) {
+export function updateUsersTable(users) {
     const tbody = document.querySelector('#users-table-body');
     tbody.innerHTML = '';
 
@@ -39,7 +41,6 @@ function updateUsersTable(users) {
     document.querySelectorAll('.delete-button').forEach(button => {
         button.addEventListener('click', async function() {
             const userId = this.getAttribute('data-user-id');
-            // console.log('userId = ' + userId);
             await deleteUser(userId);
         });
     });

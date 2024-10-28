@@ -1,4 +1,7 @@
-function populateEditUserForm(event) {
+import {clearErrors, getSelectedRoles, handleValidationErrors} from "./utils";
+import {fetchAndUpdateUsersTable} from "./update-users-table";
+
+export function populateEditUserForm(event) {
     const button = event.relatedTarget;
     const userId = button.getAttribute('data-bs-id');
     const userFirstName = button.getAttribute('data-bs-firstname');
@@ -21,28 +24,7 @@ function populateEditUserForm(event) {
     modalEmailInput.value = userEmail;
 }
 
-const userEditModal = document.querySelector('#userEditModal');
-userEditModal.addEventListener('show.bs.modal', populateEditUserForm)
-
-userEditModal.addEventListener('hidden.bs.modal', function () {
-    const form = userEditModal.querySelector('.edit-user-form');
-    clearErrors(form);
-    form.reset();
-});
-
-document.querySelector('.edit-user-button').addEventListener('click', async function () {
-    const form = document.querySelector('.edit-user-form');
-    clearErrors(form);
-    await handleFormSubmission(form, editUser);
-});
-
-document.querySelector('.edit-user-button').addEventListener('click', async function () {
-    const form = document.querySelector('.edit-user-form');
-    clearErrors(form);
-    await handleFormSubmission(form, editUser);
-});
-
-async function editUser(form) {
+export async function editUser(form) {
     const userId = form.querySelector('#user-id').value;
     const formData = {
         id: userId,

@@ -1,11 +1,6 @@
-document.querySelectorAll('.delete-button').forEach(button => {
-    button.addEventListener('click', async function() {
-        const userId = this.getAttribute('data-user-id');
-        await deleteUser(userId);
-    });
-});
+import {fetchAndUpdateUsersTable} from "./update-users-table";
 
-async function deleteUser(userId) {
+export async function deleteUser(userId) {
     if (!confirm('Are you sure you want to delete this user?')) {
         return;
     }

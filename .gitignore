@@ -37,3 +37,9 @@ docker-compose.yml
 
 ### Logfiles ###
 *.log
+
+### Bundle.js ###
+dist/
+
+### Node ###
+node_modules/

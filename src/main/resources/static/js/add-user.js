@@ -1,10 +1,7 @@
-document.querySelector('.add-user-button').addEventListener("click", async function() {
-    const form = document.querySelector('.add-user-form');
-    clearErrors(form);
-    await handleFormSubmission(form, (form) => addUser(form));
-});
+import { getSelectedRoles, clearForm, clearErrors, handleValidationErrors } from "./utils";
+import { fetchAndUpdateUsersTable } from "./update-users-table";
 
-async function addUser(form) {
+export async function addUser(form) {
     const formData = {
         firstName: form.querySelector('.user-firstname').value,
         lastName: form.querySelector('.user-lastname').value,

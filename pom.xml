@@ -11,7 +11,7 @@
 	<groupId>ru.kata</groupId>
 	<artifactId>spring-boot_rest_js</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot_rest_js</name>
+	<name>spring-boot-rest-js</name>
 	<description>Project for Spring Boot Rest JS</description>
 
 	<properties>
@@ -121,6 +121,32 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.13.3</version>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v16.13.0</nodeVersion>
+							<npmVersion>8.1.0</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@RestController
+@org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/admin/users")
 @RequiredArgsConstructor
-public class AdminRestController {
+public class RestController {
 
     private final UserService userService;
     private final UserMapper userMapper;
