@@ -3,6 +3,7 @@ package ru.kata.spring.boot.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements UserService {
 
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -87,6 +88,7 @@ public class UserServiceImpl implements UserService {
         newUser.setRoles(requestedRoles);
     }
 
+    @Override
     public void mapAndUpdateRoles(UserRequestDto userRequestDto, User userFroUpdate) {
         Set<Role> currentRoles = userRepository.getById(userRequestDto.getId()).getRoles();
 

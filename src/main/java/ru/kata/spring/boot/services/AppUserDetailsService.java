@@ -1,6 +1,7 @@
 package ru.kata.spring.boot.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot.repositories.UserRepository;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AppUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;

@@ -1,5 +1,5 @@
-import { getSelectedRoles, clearForm, clearErrors, handleValidationErrors } from "./utils";
-import { fetchAndUpdateUsersTable } from "./update-users-table";
+import {getSelectedRoles, clearForm, clearErrors, handleValidationErrors} from "./utils";
+import {fetchAndUpdateUsersTable} from "./update-users-table";
 
 export async function addUser(form) {
     const formData = {

@@ -1,6 +1,7 @@
 package ru.kata.spring.boot.http.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -25,10 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/api/v1/admin/users")
-@RequiredArgsConstructor
-public class RestController {
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class BaseRestController {
 
     private final UserService userService;
     private final UserMapper userMapper;

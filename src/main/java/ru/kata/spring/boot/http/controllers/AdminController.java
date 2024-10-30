@@ -1,6 +1,7 @@
 package ru.kata.spring.boot.http.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import ru.kata.spring.boot.services.UserService;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AdminController {
 
     private final UserService userService;

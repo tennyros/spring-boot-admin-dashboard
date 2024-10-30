@@ -1,6 +1,7 @@
 package ru.kata.spring.boot.configs;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +16,7 @@ import ru.kata.spring.boot.services.UserService;
 import java.util.Set;
 
 @Component
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DataInitializer implements CommandLineRunner {
 
     @Value("${admin.first_name}")

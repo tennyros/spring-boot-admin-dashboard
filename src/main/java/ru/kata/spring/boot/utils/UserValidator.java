@@ -3,6 +3,7 @@ package ru.kata.spring.boot.utils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -13,7 +14,7 @@ import ru.kata.spring.boot.services.UserService;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserValidator implements Validator {
 
     private static final Logger log = LoggerFactory.getLogger(UserValidator.class);
