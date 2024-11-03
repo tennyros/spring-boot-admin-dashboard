@@ -42,7 +42,8 @@ public class User implements Serializable, UserDetails {
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @LazyCollection(LazyCollectionOption.EXTRA)
     @JoinTable(
             name = "users_roles",
