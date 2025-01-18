@@ -9,10 +9,10 @@
 		<relativePath/>
 	</parent>
 	<groupId>ru.kata</groupId>
-	<artifactId>spring-boot-rest-js</artifactId>
+	<artifactId>spring-boot-rest-fetch-js</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-rest-js</name>
-	<description>Spring Boot Rest JS</description>
+	<name>spring-boot-rest-fetch-js</name>
+	<description>Rest, JS Fetch API in Spring Boot App</description>
 
 	<properties>
 		<java.version>11</java.version>
