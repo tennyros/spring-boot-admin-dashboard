@@ -66,17 +66,17 @@ A full-stack user management system built with Spring Boot, Spring Security and 
    cd spring-boot-rest-fetch-js
    ```
 
-2. **Configure Environment Variables**
+2. **Configure environment variables**
 
    ```bash
    # Edit .env file with your configurations
    cp .env.example .env
    ```
 
-3. **Build the Application**
+3. **Build the application**
 
    ```bash
-   ./mvnw clean package
+   ./mvnw clean package -Dspring.profiles.active=dev
    ```
 
 4. **Configure docker-compose.yml file and run with Docker Compose**
@@ -87,6 +87,16 @@ A full-stack user management system built with Spring Boot, Spring Security and 
     
    # And run it
    docker-compose up -d
+   ```
+
+5. **Run the application**
+
+   ```bash
+   # Run via terminal:
+   ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+    
+   # Run via Intellij Idea (Shift + F10):
+   Type dev in Active profiles Edit Configurations of main class to setup profile
    ```
 
    The application will be available at `http://localhost:8088`

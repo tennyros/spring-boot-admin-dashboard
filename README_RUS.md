@@ -76,7 +76,7 @@ Full-stack система управления пользователями, с�
 3. **Соберите приложение**
 
    ```bash
-   ./mvnw clean package
+   ./mvnw clean package -Dspring.profiles.active=dev
    ```
 
 4. **Настройте docker-compose.yml файл и запустите с помощью Docker Compose**
@@ -87,6 +87,16 @@ Full-stack система управления пользователями, с�
     
    # И запустите
    docker-compose up -d
+   ```
+
+5. **Запуск приложения**
+
+   ```bash
+   # Запуск через терминал:
+   ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+
+   # Запуск через IntelliJ IDEA (Shift + F10):
+   Установите профиль dev в Active profiles в настройках конфигурации основного класса
    ```
 
    Приложение будет доступно по адресу `http://localhost:8088`
