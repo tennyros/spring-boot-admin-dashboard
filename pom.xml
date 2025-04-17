@@ -13,7 +13,7 @@
     <groupId>com.github.tennyros</groupId>
 	<artifactId>dashboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-rest-fetch-js</name>
+	<name>spring-boot-admin-dashboard</name>
 	<description>Spring Boot Admin Dashboard for User Management</description>
 
 	<properties>
