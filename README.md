@@ -113,3 +113,5 @@ A full-stack user management system built with Spring Boot, Spring Security and 
 - SPA-like behavior via Fetch API and JavaScript (no full-page reloads)
 
 ## 📝 License
+
+This project is licensed under the terms of the license included in the repository.

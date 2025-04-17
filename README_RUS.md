@@ -82,7 +82,6 @@ Full-stack система управления пользователями, с�
 4. **Настройте docker-compose.yml файл и запустите с помощью Docker Compose**
 
    ```bash
-   
    # Скопируйте пример конфигурации (если еще не настроено)
     cp docker-compose.example.yml docker-compose.example.yml
     
