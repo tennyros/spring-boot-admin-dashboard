@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+
+  spring-boot-rest-app-db:
+    image: mysql:8.0.27
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_MS_PASSWORD}
+      MYSQL_DATABASE: ${DB_MS_SCHEMA_NAME}
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+
+  spring-boot-rest-app:
+    image: spring-boot-rest-js:0.0.1
+    container_name: rest_js_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_MS_PASSWORD: ${DB_MS_PASSWORD}
+      DB_MS_USERNAME: ${DB_MS_USERNAME}
+      DB_MS_SCHEMA_NAME: ${DB_MS_SCHEMA_NAME}
+      SPRING_DATASOURCE_URL: jdbc:mysql://spring-boot-rest-app-db/${DB_MS_SCHEMA_NAME}
+      MAIN_ADM_FIRSTNAME: ${MAIN_ADM_FIRSTNAME}
+      MAIN_ADM_LASTNAME: ${MAIN_ADM_LASTNAME}
+      MAIN_ADM_EMAIL: ${MAIN_ADM_EMAIL}
+      MAIN_ADM_PASSWORD: ${MAIN_ADM_PASSWORD}
+      MAIN_ADM_AGE: ${MAIN_ADM_AGE}
+    ports:
+      - "8088:8080"
+    depends_on:
+      spring-boot-rest-app-db:
+          condition: service_healthy
+    restart: on-failure
