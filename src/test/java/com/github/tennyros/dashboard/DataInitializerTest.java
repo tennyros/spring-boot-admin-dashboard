@@ -1,12 +1,12 @@
-package com.github.tennyros.rest;
+package com.github.tennyros.dashboard;
 
-import com.github.tennyros.rest.configs.DataInitializer;
+import com.github.tennyros.dashboard.configs.DataInitializer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.github.tennyros.rest.repositories.RoleRepository;
-import com.github.tennyros.rest.repositories.UserRepository;
+import com.github.tennyros.dashboard.repositories.RoleRepository;
+import com.github.tennyros.dashboard.repositories.UserRepository;
 
 import static org.mockito.Mockito.when;
 
