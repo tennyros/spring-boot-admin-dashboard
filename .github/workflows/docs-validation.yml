@@ -2,7 +2,7 @@ name: Docs Validation
 
 on:
   pull_request:
-    branches: [ 'dev' ]
+    branches: [ 'develop' ]
     paths: [ 'README*.md', '**.md' ]
 
 jobs:
