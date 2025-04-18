@@ -23,7 +23,7 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
         ports:
-          - 3307:3306
+          - 3306:3306
 
     steps:
       - name: Checkout code
