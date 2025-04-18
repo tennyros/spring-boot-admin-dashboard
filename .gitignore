@@ -47,3 +47,6 @@ node/
 
 ### Credentials ###
 .env
+
+### Secrets ###
+.secrets
