@@ -31,7 +31,7 @@ A full-stack user management system built with Spring Boot, Spring Security and 
 - Spring Security
 - Spring Data JPA, Hibernate
 - MySQL 8.0
-- MapStruct, Validation, Lombok 
+- MapStruct, Validation, Lombok
 - OpenAPI UI (Swagger)
 - JUnit5, Mockito, JaCoCo
 
