@@ -50,20 +50,34 @@ Full-stack система управления пользователями, с�
 
 ## 📋 Предварительные требования
 
+🔹 Если запускаете с помощью Docker (рекомендуется):
+
+- Docker
+- Docker Compose
+- ~750 MB свободного места на диске
+
+🔹 Если запускаете вручную:
+
 - Java 11 или выше
 - Maven 3.6+
-- Docker и Docker Compose
-- Node.js v16.13.0
-- npm 8.1.0
 - MySQL 8.0
+
+> ⚙️ Node.js и npm **не обязаны быть установлены** на вашей системе —
+> они автоматически загружаются и используются плагином `frontend-maven-plugin` во время сборки проекта.
+>
+> 🛠 Однако, если вы планируете запускать фронтенд вручную (например, через `npm run build`),
+> убедитесь, что у вас установлены:
+>
+> - Node.js v16.13.0
+> - npm 8.1.0
 
 ## 🚀 Начало работы
 
 1. **Клонируйте репозиторий**
 
    ```bash
-   git clone https://github.com/tennyros/spring-boot-rest-fetch-js.git
-   cd spring-boot-rest-fetch-js
+   git clone https://github.com/tennyros/spring-boot-admin-dashboard.git
+   cd spring-boot-admin-dashboard
    ```
 
 2. **Настройте переменные окружения**
@@ -73,33 +87,53 @@ Full-stack система управления пользователями, с�
    cp .env.example .env
    ```
 
-3. **Соберите приложение**
+### 🔧 Вариант 1: запуск через Docker Compose
+
+#### Настройте docker-compose.yml файл и запустите с помощью Docker Compose
+
+   ```bash
+   # Скопируйте пример конфигурации (если еще не настроено)
+    cp docker-compose.example.yml docker-compose.yml
+    
+   # И запустите
+   docker compose up --build -d
+   ```
+
+Приложение будет доступно по адресу `http://localhost:8088`
+
+### 🔧 Вариант 2: ручной запуск
+
+1. **Убедитесь, что у вас установлен MySQL**
+
+   ```bash
+   # Либо загрузите и запустите MySQL при помощи Docker Compose 
+   # отдельно от приложения:
+   docker compose up --build -d spring-boot-admin-dashboard-db
+   
+   # Предварительно выполнив команду:
+   cp docker-compose.example.yml docker-compose.yml 
+   ```
+
+2. **Соберите приложение**
 
    ```bash
    ./mvnw clean package -Dspring.profiles.active=dev
    ```
 
-4. **Настройте docker-compose.yml файл и запустите с помощью Docker Compose**
-
-   ```bash
-   # Скопируйте пример конфигурации (если еще не настроено)
-    cp docker-compose.example.yml docker-compose.example.yml
-    
-   # И запустите
-   docker-compose up -d
-   ```
-
-5. **Запуск приложения**
+3. **Запуск приложения**
 
    ```bash
    # Запуск через терминал:
    ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 
    # Запуск через IntelliJ IDEA (Shift + F10):
-   Установите профиль dev в Active profiles в настройках конфигурации основного класса
+   Установите профиль dev в Active profiles в 
+   настройках конфигурации основного класса
    ```
 
-   Приложение будет доступно по адресу `http://localhost:8088`
+Приложение будет доступно по адресу `http://localhost:8089`
+
+> 🔁 В приложении по умолчанию Docker использует порт 8088, а при локальном запуске — 8089. Вы можете изменить это в application.properties.
 
 ## 🧪 REST API Endpoints
 

@@ -50,56 +50,89 @@ A full-stack user management system built with Spring Boot, Spring Security and 
 
 ## 📋 Prerequisites
 
+🔹 If you're running with **Docker** (recommended):
+
+- Docker
+- Docker Compose
+- ~750 MB of free disk space
+
+🔹 If you're running manually:
+
 - Java 11 or higher
 - Maven 3.6+
-- Docker and Docker Compose
-- Node.js v16.13.0
-- npm 8.1.0
 - MySQL 8.0
+
+> ⚙️ Node.js and npm are **not required** to be installed on your system —  
+> they are automatically downloaded and used by the `frontend-maven-plugin` during the build process.
+>
+> 🛠 However, if you plan to run the frontend manually (e.g., using `npm run build`),  
+> make sure you have the following versions installed:
+>
+> - Node.js v16.13.0
+> - npm 8.1.0
 
 ## 🚀 Getting Started
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/tennyros/spring-boot-rest-fetch-js.git
-   cd spring-boot-rest-fetch-js
+   git clone https://github.com/tennyros/spring-boot-admin-dashboard.git
+   cd spring-boot-admin-dashboard
    ```
 
-2. **Configure environment variables**
+2. **Set up environment variables**
 
    ```bash
-   # Edit .env file with your configurations
+   # Edit the .env file with your own configuration
    cp .env.example .env
    ```
 
-3. **Build the application**
+### 🔧 Option 1: Run using Docker Compose
+
+#### Set up the docker-compose.yml file and start the application using Docker Compose
+
+   ```bash
+   # Copy the example config file (if not already configured)
+   cp docker-compose.example.yml docker-compose.yml
+
+   # Then start the containers
+   docker compose up --build -d
+   ```
+
+The application will be available at `http://localhost:8088`
+
+### 🔧 Option 2: Run manually
+
+1. **Make sure MySQL is installed and running**
+
+   ```bash
+   # Or run a MySQL container using Docker Compose
+   # application separated:
+   docker compose up --build -d spring-boot-admin-dashboard-db
+
+   # After preparing the config file:
+   cp docker-compose.example.yml docker-compose.yml
+   ```
+
+2. **Build the application**
 
    ```bash
    ./mvnw clean package -Dspring.profiles.active=dev
    ```
 
-4. **Configure docker-compose.yml file and run with Docker Compose**
+3. **Run the application**
 
    ```bash
-   # Copy the example config (if not customized yet)  
-   cp docker-compose.example.yml docker-compose.example.yml
-    
-   # And run it
-   docker-compose up -d
-   ```
-
-5. **Run the application**
-
-   ```bash
-   # Run via terminal:
+   # Run from terminal:
    ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
-    
-   # Run via Intellij Idea (Shift + F10):
-   Type dev in Active profiles Edit Configurations of main class to setup profile
+
+   # Or run from IntelliJ IDEA (Shift + F10):
+   Set `dev` as the active profile in your run configuration
    ```
 
-   The application will be available at `http://localhost:8088`
+The application will be available at `http://localhost:8089`
+
+> 🔁 By default, the app uses port 8088 when running in Docker and 8089 when running locally. You can change this in your application.properties file.
 
 ## 🧪 REST API Endpoints
 
