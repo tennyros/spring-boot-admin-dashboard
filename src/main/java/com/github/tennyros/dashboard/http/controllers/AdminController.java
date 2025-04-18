@@ -20,7 +20,7 @@ public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
 
-    @GetMapping(value = "/admin")
+    @GetMapping(value = "admin")
     public String adminFullInfo(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
@@ -29,6 +29,6 @@ public class AdminController {
         model.addAttribute("users", users);
         model.addAttribute("userRequestDto", new UserRequestDto());
         model.addAttribute("roles", roleService.getAllRoles());
-        return "/main";
+        return "main";
     }
 }
