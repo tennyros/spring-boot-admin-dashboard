@@ -181,7 +181,7 @@
                 <version>${jacoco.plugin}</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/SpringBootSecurityDemoApplication.class</exclude>
+                        <exclude>**/SpringBootAdminDashboard.class</exclude>
                         <exclude>**/configs/**</exclude>
                         <exclude>**/models/**</exclude>
                         <exclude>**/dtos/**</exclude>
