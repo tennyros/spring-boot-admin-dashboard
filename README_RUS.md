@@ -29,11 +29,11 @@ Full-stack система управления пользователями, с�
 - Java 11
 - Spring Boot 2.6.2
 - Spring Security
-- Spring Data JPA
+- Spring Data JPA, Hibernate
 - MySQL 8.0
-- Lombok
-- MapStruct
+- MapStruct, Validation, Lombok
 - OpenAPI UI (Swagger)
+- JUnit5, Mockito, JaCoCo
 
 ### Фронтенд
 
@@ -48,6 +48,7 @@ Full-stack система управления пользователями, с�
 
 - Docker
 - Docker Compose
+- GitHub Actions CI
 - Maven
 - Node.js v16.13.0
 - npm 8.1.0
