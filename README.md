@@ -1,5 +1,9 @@
 # User Management Admin Dashboard
 
+![CI Status](https://github.com/tennyros/spring-boot-admin-dashboard/workflows/Java%20CI%20with%20Maven/badge.svg)
+![Java 11](https://img.shields.io/badge/Java-11-blue)
+![Spring Boot 2.6.2](https://img.shields.io/badge/Spring_Boot-2.6.2-brightgreen)
+
 A full-stack user management system built with Spring Boot, Spring Security and JavaScript. The application provides login functionality, user-specific views, and an admin-only panel for managing users.
 
 [English](README.md) | [Русский](README_RUS.md)
@@ -15,7 +19,7 @@ A full-stack user management system built with Spring Boot, Spring Security and 
 - ⚡ Dynamic UI (no page reloads) via JavaScript + Fetch API
 - 📄 REST API backend with Spring MVC
 - 🎨 UI built with Thymeleaf and Bootstrap
-- 🐬 MySQL containerized with Docker
+- 🐬 Application and MySQL containerized with Docker
 - 📦 Frontend bundled using Webpack, Babel and `frontend-maven-plugin`
 
 ## 🛠 Tech Stack

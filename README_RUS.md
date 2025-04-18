@@ -1,5 +1,9 @@
 # Панель администратора для управления пользователями
 
+![CI Status](https://github.com/tennyros/spring-boot-admin-dashboard/workflows/Java%20CI%20with%20Maven/badge.svg)
+![Java 11](https://img.shields.io/badge/Java-11-blue)
+![Spring Boot 2.6.2](https://img.shields.io/badge/Spring_Boot-2.6.2-brightgreen)
+
 Full-stack система управления пользователями, созданная с использованием Spring Boot, Spring Security и JavaScript. Приложение предоставляет функциональность входа в систему, пользовательские представления и панель администратора для управления пользователями.
 
 [English](README.md) | [Русский](README_RUS.md)
@@ -15,7 +19,7 @@ Full-stack система управления пользователями, с�
 - ⚡ Динамический интерфейс (без перезагрузки страницы) с использованием JavaScript + Fetch API
 - 📄 REST API бэкенд на Spring MVC
 - 🎨 Интерфейс пользователя, построенный с помощью Thymeleaf и Bootstrap
-- 🐬 MySQL контейнеризован с помощью Docker
+- 🐬 Приложение и MySQL контейнеризованы с помощью Docker
 - 📦 Фронтенд собран с использованием Webpack, Babel и `frontend-maven-plugin`
 
 ## 🛠 Технологический стек

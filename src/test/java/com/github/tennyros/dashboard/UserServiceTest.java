@@ -3,7 +3,6 @@ package com.github.tennyros.dashboard;
 import com.github.tennyros.dashboard.models.User;
 import com.github.tennyros.dashboard.repositories.UserRepository;
 import com.github.tennyros.dashboard.services.impl.UserServiceImpl;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-@Slf4j
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
