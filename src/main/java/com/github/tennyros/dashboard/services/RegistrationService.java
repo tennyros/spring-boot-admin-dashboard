@@ -1,10 +1,10 @@
 package com.github.tennyros.dashboard.services;
 
+import com.github.tennyros.dashboard.models.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.github.tennyros.dashboard.models.User;
 
 @Service
 @RequiredArgsConstructor

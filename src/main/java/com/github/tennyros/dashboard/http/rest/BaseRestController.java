@@ -1,5 +1,12 @@
 package com.github.tennyros.dashboard.http.rest;
 
+import com.github.tennyros.dashboard.dtos.OnCreate;
+import com.github.tennyros.dashboard.dtos.OnUpdate;
+import com.github.tennyros.dashboard.dtos.UserRequestDto;
+import com.github.tennyros.dashboard.dtos.UserResponseDto;
+import com.github.tennyros.dashboard.exceptions.UserIdMismatchException;
+import com.github.tennyros.dashboard.exceptions.UserNotFoundException;
+import com.github.tennyros.dashboard.exceptions.UserValidationException;
 import com.github.tennyros.dashboard.mappers.UserMapper;
 import com.github.tennyros.dashboard.models.User;
 import com.github.tennyros.dashboard.services.RegistrationService;
@@ -20,13 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.github.tennyros.dashboard.dtos.OnCreate;
-import com.github.tennyros.dashboard.dtos.OnUpdate;
-import com.github.tennyros.dashboard.dtos.UserRequestDto;
-import com.github.tennyros.dashboard.dtos.UserResponseDto;
-import com.github.tennyros.dashboard.exceptions.UserIdMismatchException;
-import com.github.tennyros.dashboard.exceptions.UserNotFoundException;
-import com.github.tennyros.dashboard.exceptions.UserValidationException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -65,7 +65,7 @@ public class BaseRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto createUser(@Valid @Validated(OnCreate.class) @RequestBody
-                                         UserRequestDto userRequestDto, BindingResult result) {
+                                      UserRequestDto userRequestDto, BindingResult result) {
 
         userValidator.validate(userRequestDto, result);
         if (result.hasErrors()) {
@@ -77,7 +77,7 @@ public class BaseRestController {
         return userMapper.toResponseDto(userEntity);
     }
 
-    @PutMapping( "/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserResponseDto updateUser(@Validated(OnUpdate.class) @PathVariable("id") Long id,
                                       @Valid @RequestBody UserRequestDto userRequestDto, BindingResult result) {

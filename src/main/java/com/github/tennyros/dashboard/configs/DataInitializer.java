@@ -56,7 +56,7 @@ public class DataInitializer implements CommandLineRunner {
             User admin = User.builder()
                     .firstName(firstName)
                     .lastName(lastName)
-                    .password(password)
+                    .password(passwordEncoder.encode(password))
                     .email(email)
                     .age(age)
                     .roles(Set.of(roleService.getRoleByName("ROLE_ADMIN").orElseThrow(RoleNotFoundException::new),

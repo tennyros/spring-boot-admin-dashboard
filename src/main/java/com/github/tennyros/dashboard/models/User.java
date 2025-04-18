@@ -62,7 +62,7 @@ public class User implements Serializable, UserDetails {
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
+            CascadeType.REFRESH, CascadeType.DETACH})
     @LazyCollection(LazyCollectionOption.EXTRA)
     @JoinTable(
             name = "users_roles",
